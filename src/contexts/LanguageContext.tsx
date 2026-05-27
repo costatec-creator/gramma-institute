@@ -293,7 +293,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.success.title": "Message Reçu", "contact.success.body": "Merci, {name}. Nous vous contacterons dans un délai de deux à trois jours ouvrables.",
     "contact.enquiry.course": "Renseignement sur un Cours", "contact.enquiry.enrol": "Inscription", "contact.enquiry.partner": "Partenariat Institutionnel",
     "contact.enquiry.media": "Médias / Presse", "contact.enquiry.other": "Autre",
-    "footer.copy": "© 2025 Gramma Institute", "whatsapp.label": "WhatsApp",
+    "footer.copy": "© 2026 Gramma Institute Of Linguistics", "whatsapp.label": "WhatsApp",
   },
 };
 
