@@ -63,7 +63,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.success.title": "Message Received", "contact.success.body": "Thank you, {name}. We will be in touch within two to three business days.",
     "contact.enquiry.course": "Course Enquiry", "contact.enquiry.enrol": "Enrolment", "contact.enquiry.partner": "Institutional Partnership",
     "contact.enquiry.media": "Media / Press", "contact.enquiry.other": "Other",
-    "footer.copy": "© 2025 Gramma Institute", "whatsapp.label": "WhatsApp",
+    "footer.copy": "© 2026 Gramma Institute Of Linguistics", "whatsapp.label": "WhatsApp",
   },
   pt: {
     "nav.home": "Início", "nav.about": "Sobre", "nav.glossary": "Glossário", "nav.contact": "Entre em Contato",
@@ -109,7 +109,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.success.title": "Mensagem Recebida", "contact.success.body": "Obrigado, {name}. Entraremos em contato dentro de dois a três dias úteis.",
     "contact.enquiry.course": "Consulta sobre Curso", "contact.enquiry.enrol": "Matrícula", "contact.enquiry.partner": "Parceria Institucional",
     "contact.enquiry.media": "Mídia / Imprensa", "contact.enquiry.other": "Outro",
-    "footer.copy": "© 2025 Gramma Institute", "whatsapp.label": "WhatsApp",
+    "footer.copy": "© 2026 Gramma Institute Of Linguistics", "whatsapp.label": "WhatsApp",
   },
   el: {
     "nav.home": "Αρχική", "nav.about": "Σχετικά", "nav.glossary": "Γλωσσάρι", "nav.contact": "Επικοινωνία",
@@ -155,7 +155,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.success.title": "Μήνυμα Ελήφθη", "contact.success.body": "Ευχαριστούμε, {name}. Θα επικοινωνήσουμε μαζί σας εντός δύο έως τριών εργάσιμων ημερών.",
     "contact.enquiry.course": "Ερώτηση για Μάθημα", "contact.enquiry.enrol": "Εγγραφή", "contact.enquiry.partner": "Θεσμική Συνεργασία",
     "contact.enquiry.media": "Μέσα / Τύπος", "contact.enquiry.other": "Άλλο",
-    "footer.copy": "© 2025 Gramma Institute", "whatsapp.label": "WhatsApp",
+    "footer.copy": "© 2026 Gramma Institute Of Linguistics", "whatsapp.label": "WhatsApp",
   },
   he: {
     "nav.home": "בית", "nav.about": "אודות", "nav.glossary": "מונחון", "nav.contact": "צור קשר",
@@ -201,7 +201,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.success.title": "ההודעה התקבלה", "contact.success.body": "תודה, {name}. נצור אתך קשר תוך שניים עד שלושה ימי עסקים.",
     "contact.enquiry.course": "שאלה על קורס", "contact.enquiry.enrol": "הרשמה", "contact.enquiry.partner": "שותפות מוסדית",
     "contact.enquiry.media": "מדיה / עיתונות", "contact.enquiry.other": "אחר",
-    "footer.copy": "© 2025 Gramma Institute", "whatsapp.label": "WhatsApp",
+    "footer.copy": "© 2026 Gramma Institute Of Linguistics", "whatsapp.label": "WhatsApp",
   },
   la: {
     "nav.home": "Principium", "nav.about": "De Nobis", "nav.glossary": "Glossarium", "nav.contact": "Colloquium",
@@ -247,7 +247,7 @@ const translations: Record<Lang, Record<string, string>> = {
     "contact.success.title": "Epistula Accepta", "contact.success.body": "Gratias, {name}. Intra duos ad tres dies negotii tibi respondebimus.",
     "contact.enquiry.course": "De Cursu Interrogatio", "contact.enquiry.enrol": "Inscriptio", "contact.enquiry.partner": "Societas Institutionalis",
     "contact.enquiry.media": "Media / Prensa", "contact.enquiry.other": "Aliud",
-    "footer.copy": "© 2025 Gramma Institute", "whatsapp.label": "WhatsApp",
+    "footer.copy": "© 2026 Gramma Institute Of Linguistics", "whatsapp.label": "WhatsApp",
   },
   fr: {
     "nav.home": "Accueil", "nav.about": "À Propos", "nav.glossary": "Glossaire", "nav.contact": "Nous Contacter",
