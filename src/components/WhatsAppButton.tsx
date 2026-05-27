@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const WHATSAPP_NUMBER = "18459794455";
+const WHATSAPP_NUMBER = "18459784455";
 const WHATSAPP_MESSAGE = "Hello, I'm interested in learning more about the Gramma Institute courses.";
 
 export default function WhatsAppButton() {
