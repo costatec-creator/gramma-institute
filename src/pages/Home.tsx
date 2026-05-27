@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import NavBar from "@/components/layout/NavBar";
@@ -88,129 +88,150 @@ const COURSES = [
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const videoA = useRef<HTMLVideoElement>(null);
+  const videoB = useRef<HTMLVideoElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
   const { t } = useLanguage();
+
+  const videos = [
+    "/videos/video1.mp4",
+    "/videos/video2.mp4",
+    "/videos/video3.mp4",
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [active, setActive] = useState(true); // true = A, false = B
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => {
+        const next = (prev + 1) % videos.length;
+        return next;
+      });
+
+      setActive((prev) => !prev);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const currentVideo = active ? videoA.current : videoB.current;
+
+    if (currentVideo) {
+      currentVideo.src = videos[index];
+      currentVideo.load();
+      currentVideo.play().catch(() => {});
+    }
+  }, [index, active]);
+
+  const VideoLayer = ({
+    videoRef,
+    isActive,
+  }: {
+    videoRef: React.RefObject<HTMLVideoElement | null>;
+    isActive: boolean;
+  }) => (
+    <video
+      ref={videoRef}
+      autoPlay
+      muted
+      playsInline
+      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1500 ${
+        isActive ? "opacity-100" : "opacity-0"
+      }`}
+    />
+  );
 
   return (
     <section
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      data-testid="section-hero"
     >
       <motion.div style={{ y }} className="absolute inset-0 scale-110">
         <div className="absolute inset-0 bg-[#0a0805]" />
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          data-testid="video-hero-bg"
-        >
-          <source src="https://assets.mixkit.co/videos/41596/41596-720.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/4056/4056-720.mp4" type="video/mp4" />
-        </video>
+
+        {/* 🎬 LAYER A */}
+        <VideoLayer videoRef={videoA} isActive={active} />
+
+        {/* 🎬 LAYER B */}
+        <VideoLayer videoRef={videoB} isActive={!active} />
       </motion.div>
 
+      {/* OVERLAYS */}
       <div className="absolute inset-0 bg-black/65" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/50" />
 
+      {/* TEXTO (igual ao teu original) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {["αληθεια", "אֱמֶת", "VERITAS", "λόγος", "שָׁלוֹם", "LUMEN"].map((text, i) => (
-          <div
-            key={i}
-            className="absolute font-cormorant text-white/[0.04] font-light select-none"
-            style={{
-              fontSize: `${60 + i * 15}px`,
-              left: `${(i * 19 + 3) % 88}%`,
-              top: `${(i * 27 + 10) % 80}%`,
-              transform: `rotate(${(i % 3 - 1) * 5}deg)`,
-            }}
-          >
-            {text}
-          </div>
-        ))}
+        {["αληθεια", "אֱמֶת", "VERITAS", "λόγος", "שָׁלוֹם", "LUMEN"].map(
+          (text, i) => (
+            <div
+              key={i}
+              className="absolute font-cormorant text-white/[0.04] font-light select-none"
+              style={{
+                fontSize: `${60 + i * 15}px`,
+                left: `${(i * 19 + 3) % 88}%`,
+                top: `${(i * 27 + 10) % 80}%`,
+                transform: `rotate(${(i % 3 - 1) * 5}deg)`,
+              }}
+            >
+              {text}
+            </div>
+          )
+        )}
       </div>
 
+      {/* CONTEÚDO ORIGINAL */}
       <motion.div
         style={{ opacity }}
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
       >
         <motion.p
-          initial={{ opacity: 0, letterSpacing: "0.5em" }}
-          animate={{ opacity: 1, letterSpacing: "0.3em" }}
-          transition={{ duration: 1.2, delay: 0.2 }}
           className="font-cinzel text-xs text-amber-400/70 tracking-[0.4em] uppercase mb-8"
-          data-testid="text-hero-tagline"
         >
           {t("hero.tagline")}
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 0.5 }}
           className="font-cormorant text-white font-light leading-none mb-8"
           style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
-          data-testid="text-hero-headline"
         >
           {t("hero.headline1")}
           <br />
-          <span className="italic text-amber-200/90">{t("hero.headline2")}</span>
+          <span className="italic text-amber-200/90">
+            {t("hero.headline2")}
+          </span>
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 0.8 }}
-          className="font-eb-garamond text-white/60 text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto mb-12 font-light"
-          data-testid="text-hero-subtitle"
-        >
+        <motion.p className="font-eb-garamond text-white/60 text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto mb-12 font-light">
           {t("hero.subtitle")}
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+        <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#courses"
             className="font-cinzel text-sm tracking-[0.2em] px-8 py-3.5 bg-amber-700 text-amber-50 hover:bg-amber-600 transition-colors duration-300"
-            data-testid="button-hero-explore"
           >
             {t("hero.explore")}
           </a>
+
           <Link
             href="/contact"
             className="font-cinzel text-sm tracking-[0.2em] px-8 py-3.5 border border-white/30 text-white/80 hover:border-white/60 hover:text-white transition-all duration-300"
-            data-testid="button-hero-contact"
           >
             {t("hero.touch")}
           </Link>
         </motion.div>
       </motion.div>
-
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8 }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="font-cinzel text-white/30 text-xs tracking-[0.3em]">{t("hero.scroll")}</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-            className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent"
-          />
-        </motion.div>
-      </div>
     </section>
   );
 }
